@@ -1,3 +1,5 @@
+# server.py
+import os
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 import uvicorn
 
@@ -20,4 +22,5 @@ async def websocket_endpoint(ws: WebSocket):
         print(f"[-] Client disconnected: {ws.client}")
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=10000)
+    port = int(os.environ.get("PORT", 10000))  # 👈 Render задає PORT автоматично
+    uvicorn.run(app, host="0.0.0.0", port=port)
